@@ -1,0 +1,8 @@
+esp8266		mcu
+GND		gnd
+VCC		3V3
+RX		45
+TX		46
+
+
+此外还需要一个hc430+另外一个esp8266

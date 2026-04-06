@@ -1,0 +1,4 @@
+ttl转串口模块	mcu
+TX		46
+RX		45
+GND		gnd

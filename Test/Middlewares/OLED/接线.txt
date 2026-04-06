@@ -1,0 +1,4 @@
+VCC：3.3V
+GND：gnd
+SCL：24
+SDA：25

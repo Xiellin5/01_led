@@ -1,0 +1,4 @@
+SCL	26
+SDA	30
+VCC	3.3
+GND	gnd

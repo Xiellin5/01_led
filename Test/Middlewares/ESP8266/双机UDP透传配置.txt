@@ -1,0 +1,34 @@
+两个都要配置，并且这个是两个都作为st来使用的
+
+AT-->OK
+
+AT+CWMODE=3->OK
+
+AT+CWJAP="",""->
+	WIFI DISCONNECT
+	WIFI CONNECTED
+	WIFI GOT IP
+
+
+AT+CIFSR-->
+	+CIFSR:APIP,"192.168.4.1"
+	+CIFSR:APMAC,"fe:f5:c4:ba:cc:6c"
+	+CIFSR:STAIP,"192.168.0.109"
+	+CIFSR:STAMAC,"fc:f5:c4:ba:cc:6c"
+
+
+
+AT+CIPSTART="UDP",远端IP地址,远端ip端口，本地端口，0-->CONNECT
+
+AT+CIPMUX=0->OK
+
+AT+CIPMODE=1->OK
+
+AT+CIPSEND
+
+
+退出
++++(无回车和空行)
+
+AT+CIPMODE=0->OK
+AT+CIPCLOSE->CLOSED
