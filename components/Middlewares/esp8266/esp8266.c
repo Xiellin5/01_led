@@ -12,6 +12,11 @@ uint8_t at_cmd[512];
 
 static esp_err_t ESP8266_USART_Init(void)
 {
+    static uint8_t is_init = 0;
+    if (is_init)
+    {
+        return ESP_OK; // 已经初始化过了，直接返回成功
+    }
     memset(wifi.rxbuff, 0, ESP8266_BUF_SIZE);
     memset(wifi.wifi_ip, 0, ESP8266_BUF_SIZE);
     memset(at_cmd, 0, sizeof(at_cmd));
@@ -30,6 +35,7 @@ static esp_err_t ESP8266_USART_Init(void)
     // Install UART driver for interrupt-driven reads and writes
     ESP_ERROR_CHECK(uart_driver_install(ESP8266_USART_UX, ESP8266_RX_BUF_SIZE, ESP8266_TX_BUF_SIZE, 0, NULL, 0));
 
+    is_init = 1;
     return ESP_OK;
 }
 

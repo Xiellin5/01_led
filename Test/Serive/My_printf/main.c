@@ -2,10 +2,10 @@
 #include "freertos/task.h"
 #include "nvs_flash.h"
 #include "led.h"
-#include "pid.h"
-#include "My_printf.h"
 #include "esp8266.h"
+#include "My_printf.h"
 #include <stdio.h>
+#include <math.h>
 
 void print(uint8_t *str)
 {
@@ -17,7 +17,7 @@ void print(uint8_t *str)
  * @param       无
  * @retval      无
  */
-// pid控制，输出目标当前位置
+// 效果：以firewater格式打印sin和cos
 void app_main(void)
 {
     esp_err_t ret;
@@ -29,18 +29,12 @@ void app_main(void)
     }
     print_register(ESP8266_Init, print);
     led_init();
-    pid_t pid;
-    pid_create(&pid, 0);
-    pid_init(&pid);
-    pid_set_k(&pid, 0.80, 0.01, 0.001);
-    pid_set_target(&pid, 100);
-    pid_set_current(&pid, 0);
+    float i = 0;
     while (1)
     {
+        print_FireWater(2, sin(i), cos(i));
+        i += 0.1;
         LED_TOGGLE();
-        print_FireWater(1, pid.current);
-        pid_calc(&pid);
-        pid_set_current(&pid, pid.current + pid.total_out);
-        vTaskDelay(pdMS_TO_TICKS(100));
+        vTaskDelay(pdMS_TO_TICKS(500));
     }
 }

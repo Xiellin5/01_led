@@ -17,7 +17,7 @@ void print(uint8_t *str)
  * @param       无
  * @retval      无
  */
-// pid控制，输出目标当前位置
+// pid控制，输出目标当前位置(VOFA+可看到波形图)
 void app_main(void)
 {
     esp_err_t ret;

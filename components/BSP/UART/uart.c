@@ -1,4 +1,5 @@
 #include "uart.h"
+
 void uart_init(uint32_t baudrate)
 {
     uart_config_t uart_config = {
