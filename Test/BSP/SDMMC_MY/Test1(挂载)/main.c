@@ -1,53 +1,10 @@
 #include "freertos/FreeRTOS.h"
+#include "i2s.h"
 #include "nvs_flash.h"
 #include "sdmmc.h"
 #include "led.h"
 
-void write_hello_file(void)
-{
-    const char *file_path = MOUNT_POINT "/hello.txt";
-
-    // 打开文件（不存在则创建，存在则覆盖）
-    FILE *f = fopen(file_path, "w");
-    if (f == NULL)
-    {
-        ESP_LOGE("sdmmc", "Failed to open file for writing");
-        return;
-    }
-
-    // 写入内容
-    fprintf(f, "hello,world!\n");
-
-    // 关闭文件
-    fclose(f);
-    ESP_LOGI("sdmmc", "File written successfully: %s", file_path);
-}
-
-void read_hello_file(void)
-{
-    const char *file_path = MOUNT_POINT "/hello.txt";
-
-    // 打开文件（只读模式）
-    FILE *f = fopen(file_path, "r");
-    if (f == NULL)
-    {
-        ESP_LOGE("sdmmc", "Failed to open file for reading");
-        return;
-    }
-
-    // 读取内容并打印
-    char line[64];
-    while (fgets(line, sizeof(line), f) != NULL)
-    {
-        // 去掉末尾换行符（可选）
-        ESP_LOGI("sdmmc", "Read from file: '%s'", line);
-    }
-
-    // 关闭文件
-    fclose(f);
-}
-
-// 效果：挂载SD卡，创建文件，写入内容，读取内容，LED闪烁
+// 效果：SD卡挂载成功，并且打印SD卡的相关信息
 void app_main(void)
 {
     esp_err_t ret;
@@ -83,8 +40,6 @@ void app_main(void)
     // lcd_show_num(80, 130, size, 5, 16, BLUE);
     printf("Total: %ld MB\n", size);
 
-    write_hello_file();
-    read_hello_file();
     while (1)
     {
         LED_TOGGLE();

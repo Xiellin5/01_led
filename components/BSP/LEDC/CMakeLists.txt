@@ -1,18 +1,8 @@
 set(src_dirs
-            LED
-            EXTI
-            Serial
-            UART
-            ESPTIMER
-            LEDC)
+            .)
 
 set(include_dirs
-            LED
-            EXTI
-            Serial
-            UART
-            ESPTIMER
-            LEDC)
+            .)
 
 set(requires
             driver

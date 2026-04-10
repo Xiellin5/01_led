@@ -1,4 +1,5 @@
 #include "freertos/FreeRTOS.h"
+#include "i2s.h"
 #include "nvs_flash.h"
 #include "sdmmc.h"
 #include "led.h"
