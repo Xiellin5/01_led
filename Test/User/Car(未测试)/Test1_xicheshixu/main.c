@@ -40,8 +40,8 @@ void app_main(void)
         LED_TOGGLE();
         int Ain1 = gpio_get_level(CAR_L_AIN1_PIN);
         int Ain2 = gpio_get_level(CAR_L_AIN2_PIN);
-        int Bin1 = gpio_get_level(16);
-        int Bin2 = gpio_get_level(17);
+        int Bin1 = gpio_get_level(CAR_R_BIN1_PIN);
+        int Bin2 = gpio_get_level(CAR_R_BIN2_PIN);
         printf("Ain1:%d,Ain2:%d,Bin1:%d,Bin2:%d\n", Ain1, Ain2, Bin1, Bin2);
         vTaskDelay(pdMS_TO_TICKS(100));
     }

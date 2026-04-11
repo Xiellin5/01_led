@@ -1,93 +1,76 @@
+#include <stdio.h>
 #include "freertos/FreeRTOS.h"
-#include "nvs_flash.h"
-#include "sdmmc.h"
-#include "led.h"
+#include "driver/gpio.h"
+#include "esp_log.h"
+// 测试小车代码
 
-void write_hello_file(void)
+int gpio_num[] = {
+    2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 32, 33,
+    23, 51, 49, 50, 48, 47, 46, 45, 36, 35, 30, 26, 27, 28, 29, 31, 25, 24, 52, 53, 0};
+char *TAG = "main";
+// 现象：2~15的引脚电压最大为1.24V，其他可以达到3.3V
+// gnd测试全部通过
+void vcc_test(void)
 {
-    const char *file_path = MOUNT_POINT "/hello.txt";
-
-    // 打开文件（不存在则创建，存在则覆盖）
-    FILE *f = fopen(file_path, "w");
-    if (f == NULL)
+    int level = 1;
+    for (int i = 0; gpio_num[i] != 0; i++)
     {
-        ESP_LOGE("sdmmc", "Failed to open file for writing");
-        return;
+        gpio_config_t gpio_conf = {
+            .pin_bit_mask = 1ULL << gpio_num[i],
+            .mode = GPIO_MODE_INPUT_OUTPUT,
+            .pull_up_en = GPIO_PULLUP_DISABLE,
+            .pull_down_en = GPIO_PULLDOWN_DISABLE,
+            .intr_type = GPIO_INTR_DISABLE};
+        ESP_ERROR_CHECK(gpio_config(&gpio_conf));
+        gpio_set_level(gpio_num[i], level);
+        printf("gpio set level:%d\n", level);
+        vTaskDelay(pdMS_TO_TICKS(100));
+        printf("gpio read level:%d\n", gpio_get_level(gpio_num[i]));
+        if (gpio_get_level(gpio_num[i]) != level)
+        {
+            ESP_LOGE(TAG, "gpio:%d test fail", gpio_num[i]);
+        }
+        else
+        {
+            ESP_LOGI(TAG, "gpio:%d test pass", gpio_num[i]);
+        }
     }
-
-    // 写入内容
-    fprintf(f, "hello,world!\n");
-
-    // 关闭文件
-    fclose(f);
-    ESP_LOGI("sdmmc", "File written successfully: %s", file_path);
 }
 
-void read_hello_file(void)
+void gnd_test(void)
 {
-    const char *file_path = MOUNT_POINT "/hello.txt";
-
-    // 打开文件（只读模式）
-    FILE *f = fopen(file_path, "r");
-    if (f == NULL)
+    int level = 0;
+    for (int i = 0; gpio_num[i] != 0; i++)
     {
-        ESP_LOGE("sdmmc", "Failed to open file for reading");
-        return;
+        gpio_config_t gpio_conf = {
+            .pin_bit_mask = 1ULL << gpio_num[i],
+            .mode = GPIO_MODE_INPUT_OUTPUT,
+            .pull_up_en = GPIO_PULLUP_DISABLE,
+            .pull_down_en = GPIO_PULLDOWN_DISABLE,
+            .intr_type = GPIO_INTR_DISABLE};
+        ESP_ERROR_CHECK(gpio_config(&gpio_conf));
+        gpio_set_level(gpio_num[i], level);
+        printf("gpio set level:%d\n", level);
+        vTaskDelay(pdMS_TO_TICKS(100));
+        printf("gpio read level:%d\n", gpio_get_level(gpio_num[i]));
+        if (gpio_get_level(gpio_num[i]) != level)
+        {
+            ESP_LOGE(TAG, "gpio:%d test fail", gpio_num[i]);
+        }
+        else
+        {
+            ESP_LOGI(TAG, "gpio:%d test pass", gpio_num[i]);
+        }
     }
-
-    // 读取内容并打印
-    char line[64];
-    while (fgets(line, sizeof(line), f) != NULL)
-    {
-        // 去掉末尾换行符（可选）
-        ESP_LOGI("sdmmc", "Read from file: '%s'", line);
-    }
-
-    // 关闭文件
-    fclose(f);
 }
 
-// 效果：挂载SD卡，创建文件，写入内容，读取内容，LED闪烁
 void app_main(void)
 {
-    esp_err_t ret;
-    uint32_t size = 0;
-
-    ret = nvs_flash_init(); /* 初始化NVS */
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND)
-    {
-        ESP_ERROR_CHECK(nvs_flash_erase());
-        ESP_ERROR_CHECK(nvs_flash_init());
-    }
-
-    led_init(); /* LED初始化 */
-    // lcd_init(); /* LCD屏初始化 */
-
-    // lcd_show_string(30, 50, 200, 16, 16, "ESP32-P4", RED);
-    // lcd_show_string(30, 70, 200, 16, 16, "SD TEST", RED);
-    // lcd_show_string(30, 90, 200, 16, 16, "ATOM@ALIENTEK", RED);
-
-    while (sdmmc_init()) /* 检测不到SD卡 */
-    {
-        // lcd_show_string(30, 110, 200, 16, 16, "SD Card Error!", RED);
-        vTaskDelay(pdMS_TO_TICKS(200));
-        printf("SD Card Not Found!\n");
-        // lcd_fill(30, 110, 239, 126, WHITE);
-        vTaskDelay(pdMS_TO_TICKS(200));
-    }
-
-    // lcd_show_string(30, 110, 200, 16, 16, "SD Card OK!", RED);
-    // lcd_show_string(30, 130, 200, 16, 16, "Total:      MB", RED);
-    printf("SD Card OK!\n");
-    size = ((uint64_t)card->csd.capacity) * card->csd.sector_size / (1024 * 1024);
-    // lcd_show_num(80, 130, size, 5, 16, BLUE);
-    printf("Total: %ld MB\n", size);
-
-    write_hello_file();
-    read_hello_file();
+    // vcc_test();
+    // vTaskDelay(pdMS_TO_TICKS(1000));
+    gnd_test();
     while (1)
     {
-        LED_TOGGLE();
-        vTaskDelay(pdMS_TO_TICKS(500));
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
