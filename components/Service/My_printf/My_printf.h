@@ -1,5 +1,4 @@
-#ifndef MY_PRINTF_H_
-#define MY_PRINTF_H_
+#pragma once
 #include "stdbool.h"
 #include "stdint.h"
 
@@ -13,5 +12,3 @@ struct printer_t
 
 void print_register(void (*init)(void), void (*print_string)(uint8_t *str));
 void print_FireWater(int count, ...);
-
-#endif /* MY_PRINTF_H_ */

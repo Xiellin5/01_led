@@ -1,4 +1,71 @@
 dependencies:
+  espressif/dl_fft:
+    component_hash: 7dadbd644c0d7ba4733cc3726ec4cff6edf27b043725e1115861dec1609a3d28
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 0.3.1
+  espressif/esp-dl:
+    component_hash: 3988acc4c6114459c9134b65d9088195c14d43a80193fe2ca2785c1fe0390f36
+    dependencies:
+    - name: espressif/dl_fft
+      registry_url: https://components.espressif.com
+      require: private
+      version: '>=0.3.1'
+    - name: espressif/esp-dsp
+      registry_url: https://components.espressif.com
+      require: private
+      version: ==1.7.0
+    - name: espressif/esp_new_jpeg
+      registry_url: https://components.espressif.com
+      require: private
+      version: ^0.6.1
+    - name: idf
+      require: private
+      version: '*'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    targets:
+    - esp32
+    - esp32c2
+    - esp32c3
+    - esp32c5
+    - esp32c6
+    - esp32p4
+    - esp32s2
+    - esp32s3
+    version: 3.3.0
+  espressif/esp-dsp:
+    component_hash: 42dce32d46ac93dc11f60d368e29a830e9661c7345d794b8a45c343479cae636
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.2'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 1.7.0
+  espressif/esp_new_jpeg:
+    component_hash: e6af208a875abd0ecfc0213d3751a11b504b463ebde6930f24096047925fa5c1
+    dependencies: []
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    targets:
+    - esp32
+    - esp32s2
+    - esp32s3
+    - esp32p4
+    - esp32c2
+    - esp32c3
+    - esp32c5
+    - esp32c6
+    version: 0.6.1
   espressif/mpu6050:
     component_hash: 3370b55e3c1337c0a80c8cd833bf48c0ba61cf9f7d226856ae88abb61eba1d67
     dependencies:
@@ -14,8 +81,9 @@ dependencies:
       type: idf
     version: 5.5.1
 direct_dependencies:
+- espressif/esp-dl
 - espressif/mpu6050
 - idf
-manifest_hash: fe34eaad84a3a3527782b521c30703a9bb9e9595c71cc0e0193aa18cb76ca1ba
+manifest_hash: bfc4f473682bc02bf4de74db9cef1ec052c12f3e6e06a722eb58b2fe6ea12131
 target: esp32p4
 version: 2.0.0

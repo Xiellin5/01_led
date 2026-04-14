@@ -1,5 +1,4 @@
-#ifndef __FILTER_H
-#define __FILTER_H
+#pragma once
 #include <stdint.h>
 #include "math.h"
 #include "string.h"
@@ -74,4 +73,3 @@ uint16_t debounce_filter(uint16_t new_value, uint16_t *last_valid,
 uint16_t amplitude_limit_debounce_filter(uint16_t new_value, uint16_t *last_valid,
                                          uint16_t *counter, uint16_t limit,
                                          uint16_t max_count);
-#endif /* __FILTER_H */

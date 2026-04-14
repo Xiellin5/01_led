@@ -1,5 +1,4 @@
-#ifndef __EXTI_H__
-#define __EXTI_H__
+#pragma once
 #include "driver/gpio.h"
 #include "esp_check.h"
 #include "esp_rom_sys.h"
@@ -9,4 +8,3 @@
 #define BOOT_INT gpio_get_level(BOOT_INT_GPIO_PIN)
 
 void exti_init(void);
-#endif /* __EXTI_H__ */

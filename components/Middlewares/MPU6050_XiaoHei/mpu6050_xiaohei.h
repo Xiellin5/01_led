@@ -1,5 +1,4 @@
-#ifndef __MPU6050_XIAOHEI_H
-#define __MPU6050_XIAOHEI_H
+#pragma once
 #include "mpu6050_xiaohei_need.h"
 // MPU6050 AD0控制脚
 #define MPU_AD0_CTRL PAout(15) // 控制AD0电平,从而控制MPU地址
@@ -110,4 +109,3 @@ esp_err_t MPU_Get_Gyroscope(mpu6050_handle_t sensor, short *gx, short *gy, short
 esp_err_t MPU_Get_Accelerometer(mpu6050_handle_t sensor, short *ax, short *ay, short *az);
 
 void DMP_Init(void);
-#endif

@@ -1,5 +1,4 @@
-#ifndef PID_H_
-#define PID_H_
+#pragma once
 #include "math.h"
 #include "stdbool.h"
 #include "stdint.h"
@@ -40,5 +39,3 @@ void pid_set_k(pid_t *pid, float kp, float ki, float kd);
 void pid_set_i_max_limit(pid_t *pid, float i_max_limit);
 void pid_set_total_max_limit(pid_t *pid, float total_max_limit);
 void pid_set_i_bound(pid_t *pid, float i_bound);
-
-#endif /* PID_H_ */

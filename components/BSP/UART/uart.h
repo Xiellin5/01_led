@@ -1,5 +1,4 @@
-#ifndef __UART_H__
-#define __UART_H__
+#pragma once
 #include "driver/uart.h"
 #include "esp_system.h"
 #include "driver/gpio.h"
@@ -12,5 +11,3 @@
 #define TX_BUF_SIZE RX_BUF_SIZE
 
 void uart_init(uint32_t baudrate);
-
-#endif /* __UART_H__ */
