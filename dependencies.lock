@@ -84,6 +84,6 @@ direct_dependencies:
 - espressif/esp-dl
 - espressif/mpu6050
 - idf
-manifest_hash: bfc4f473682bc02bf4de74db9cef1ec052c12f3e6e06a722eb58b2fe6ea12131
+manifest_hash: 065c24a821a05811caf86c1d30e8693b17eff66ca30838ff6876ce33cd623d05
 target: esp32p4
 version: 2.0.0
