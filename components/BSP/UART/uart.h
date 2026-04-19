@@ -1,16 +1,16 @@
-#ifndef __UART_H__
-#define __UART_H__
-#include "driver/uart.h"
-#include "esp_system.h"
-#include "driver/gpio.h"
-/* 引脚和串口定义 */
-#define USART_UX UART_NUM_0
-#define USART_TX_GPIO_PIN GPIO_NUM_37
-#define USART_RX_GPIO_PIN GPIO_NUM_38
-/* 串口接收相关定义 */
-#define RX_BUF_SIZE 1024
-#define TX_BUF_SIZE RX_BUF_SIZE
+#ifndef _UART_H_
+#define _UART_H_
 
-void uart_init(uint32_t baudrate);
+#include <stdint.h>
 
-#endif /* __UART_H__ */
+// UART 引脚与参数定义
+#define UART_PORT      UART_NUM_1
+#define ESP32_TX_PIN   17
+#define ESP32_RX_PIN   18
+#define BAUD_RATE      3000000
+
+// 函数声明
+void UART_Init(void);
+int UART_Read_Bytes(uint8_t *buf, uint32_t length, uint32_t timeout_ms);
+
+#endif /* _UART_H_ */

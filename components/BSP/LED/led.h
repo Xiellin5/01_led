@@ -2,7 +2,7 @@
 #define __LED_H__
 #include "driver/gpio.h"
 #include "esp_check.h"
-#define LED_GPIO_PIN GPIO_NUM_51
+#define LED_GPIO_PIN 51
 
 #define LED_ON()                         \
     {                                    \
