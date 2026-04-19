@@ -18,9 +18,7 @@
  ****************************************************************************************************
  */
 
-#ifndef __SDMMC_H
-#define __SDMMC_H
-
+#pragma once
 #include "sd_pwr_ctrl_by_on_chip_ldo.h"
 #include "esp_vfs_fat.h"
 #include "sdmmc_cmd.h"
@@ -44,5 +42,3 @@ extern sdmmc_card_t *card;
 /* 函数声明 */
 esp_err_t sdmmc_init(void);    /* SD卡初始化并挂载SD卡 */
 esp_err_t sdmmc_unmount(void); /* 取消挂载SD卡 */
-
-#endif

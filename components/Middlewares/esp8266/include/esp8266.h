@@ -1,5 +1,4 @@
-#ifndef _ESP8266_H_
-#define _ESP8266_H_
+#pragma once
 #include "stdint.h"
 #include "esp_system.h"
 
@@ -44,5 +43,3 @@ esp_err_t ESP8266_Stop_CIPSend(void);
 esp_err_t ESP8266_AT_Test(void);
 void ESP8266_Send_test(void);
 esp_err_t ESP8266_UDP_PS_Test(void);
-
-#endif /* _ESP8266_H_ */

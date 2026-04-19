@@ -1,5 +1,4 @@
-#ifndef __LED_H__
-#define __LED_H__
+#pragma once
 #include "driver/gpio.h"
 #include "esp_check.h"
 #define LED_GPIO_PIN 51
@@ -21,4 +20,3 @@
 
 void led_init(void);
 uint32_t led_get_level(void);
-#endif

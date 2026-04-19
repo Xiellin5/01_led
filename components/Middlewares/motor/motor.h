@@ -1,5 +1,4 @@
-#ifndef __MOTOR_H__
-#define __MOTOR_H__
+#pragma once
 #include "stdint.h"
 #include "driver/gpio.h"
 #include "ledc.h"
@@ -27,5 +26,3 @@ struct motor_handle_t
 
 void MOTOR_Init(motor_handle_t *motor_handle);
 void Motor_SetSpeed(motor_handle_t *motor_handle, int8_t Speed);
-
-#endif /* __MOTOR_H__ */

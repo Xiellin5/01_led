@@ -1,5 +1,4 @@
-#ifndef __OLED_FONT_H
-#define __OLED_FONT_H
+#pragma once
 #include "stdint.h"
 /*OLED字模库，宽8像素，高16像素*/
 const uint8_t OLED_F8x16[][16] =
@@ -305,5 +304,3 @@ const uint8_t OLED_F8x16[][16] =
 			0x00, //~ 94
 		},
 };
-
-#endif

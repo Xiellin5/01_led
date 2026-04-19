@@ -4,8 +4,7 @@
  * @note Compatible with GRBL serial interface, ported to ESP32-P4 UART driver
  * @copyright GNU General Public License v3.0
  */
-#ifndef SERIAL_H
-#define SERIAL_H
+#pragma once
 
 #include <stdint.h>
 #include "esp_system.h"
@@ -107,5 +106,3 @@ uint16_t serial_get_rx_buffer_count();
  * @return uint8_t: Number of used bytes
  */
 uint16_t serial_get_tx_buffer_count();
-
-#endif // SERIAL_H

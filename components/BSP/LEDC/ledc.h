@@ -1,5 +1,4 @@
-#ifndef __LEDC_H__
-#define __LEDC_H__
+#pragma once
 
 #include "esp_system.h"
 #include "driver/ledc.h"
@@ -23,5 +22,3 @@ struct ledc_config_t
 void ledc_init(ledc_config_t *ledc_config);
 uint32_t ledc_duty_pow(uint32_t duty, uint8_t m, uint8_t n);
 void ledc_pwm_set_duty(ledc_config_t *ledc_config, uint16_t duty);
-
-#endif /* __LEDC_H__ */

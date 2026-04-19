@@ -1,0 +1,9 @@
+先运行--》监控获取结果--》把相关的日志复制到results/visualize_logs.py的RAW_LOG_DATA变量中
+--》然后运行这个py文件，即可得到效果图
+
+常用使用报错：
+1.factory不够大--》调大
+2.触发了看门狗--》正常（因为运行有点慢）
+
+
+注意：要记得把main文件夹的CMakeLists.txt注释去掉，并且把srcs的对象改成app_main.cpp
