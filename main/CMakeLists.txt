@@ -20,7 +20,7 @@ idf_component_register(SRCS "app_main.cpp"
 # 2. Local Project: main/models/[p4|s3]/
 #    like
 #         yolo26n_lego_512_s8_p4.espdl   # Custom Lego Detection (28 Classes)
-set(MODEL_FILENAME "yolo26n_lego_512_s8_p4.espdl")
+set(MODEL_FILENAME "yolo26n_animals_512_s8_p4.espdl")
 # =========================================================================
 
 # --- Internal Logic: Path and Symbol Resolution ---
@@ -69,6 +69,10 @@ target_include_directories(${COMPONENT_LIB} PRIVATE "${INCLUDE_DIR}")
 # Auto-detect model type from filename and define USE_LEGO_MODEL for C++
 if(MODEL_FILENAME MATCHES "lego")
     add_definitions(-DUSE_LEGO_MODEL)
+elseif(MODEL_FILENAME MATCHES "coco")
+    add_definitions(-DUSE_COCO_MODEL)
+elseif(MODEL_FILENAME MATCHES "animals")
+    add_definitions(-DUSE_ANIMALS_MODEL)
 endif()
 
 # Generate the Symbol name (Sanitized)
@@ -88,7 +92,9 @@ target_add_aligned_binary_data(${COMPONENT_LIB} "${FINAL_PATH}" BINARY)
 # Embed test images (matched to model type)
 if(MODEL_FILENAME MATCHES "lego")
     target_add_aligned_binary_data(${COMPONENT_LIB} "images/lego.jpg" BINARY)
-else()
+elseif(MODEL_FILENAME MATCHES "coco")
     target_add_aligned_binary_data(${COMPONENT_LIB} "images/bus.jpg" BINARY)
     target_add_aligned_binary_data(${COMPONENT_LIB} "images/person.jpg" BINARY)
+elseif(MODEL_FILENAME MATCHES "animals")
+    target_add_aligned_binary_data(${COMPONENT_LIB} "images/fox.jpg" BINARY)
 endif()

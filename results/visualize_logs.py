@@ -39,11 +39,9 @@ COLORS = ["#FF3333", "#3399FF", "#33CC66", "#FF9900", "#CC33FF", "#00CCCC"]
 # I (6614) YOLO26: [category: bicycle, score: 0.66, x1: 189, y1: 306, x2: 388, y2: 410]
 # """
 RAW_LOG_DATA = """
-I (2180) image:: lego.jpg
-I (4329) yolo26_detect: Pre: 15 ms | Inf: 2031 ms | Post: 5 ms
-I (4330) YOLO26: [category: 2x2_green, score: 0.79, x1: 223, y1: 137, x2: 331, y2: 293]
-I (4332) YOLO26: [category: 2x4_green, score: 0.97, x1: 107, y1: 129, x2: 250, y2: 374]
-I (4339) YOLO26: [category: 2x4_green, score: 0.95, x1: 293, y1: 150, x2: 423, y2: 411]
+I (2446) image:: fox.jpg
+I (4332) yolo26_detect: Pre: 11 ms | Inf: 1810 ms | Post: 2 ms
+I (4333) YOLO26: [category: fox, score: 0.99, x1: 192, y1: 51, x2: 509, y2: 506]
 """
 
 

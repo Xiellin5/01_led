@@ -16,9 +16,12 @@ static const char *TAG = "yolo26_detect";
 #ifdef USE_LEGO_MODEL
 #include "lego_classes.hpp"
 const char **current_classes = lego_classes;
-#else
+#elif USE_COCO_MODEL
 #include "coco_classes.hpp"
 const char **current_classes = coco_classes;
+#elif USE_ANIMALS_MODEL
+#include "animals_classes.hpp"
+const char **current_classes = animals_classes;
 #endif
 // =========================================================================
 //
@@ -31,11 +34,17 @@ extern const uint8_t model_binary_start[] asm(MODEL_SYMBOL_STR);
 #ifdef USE_LEGO_MODEL
 extern const uint8_t lego_jpg_start[] asm("_binary_lego_jpg_start");
 extern const uint8_t lego_jpg_end[] asm("_binary_lego_jpg_end");
-#else
+
+#elif USE_COCO_MODEL
 extern const uint8_t bus_jpg_start[] asm("_binary_bus_jpg_start");
 extern const uint8_t bus_jpg_end[] asm("_binary_bus_jpg_end");
 extern const uint8_t person_jpg_start[] asm("_binary_person_jpg_start");
 extern const uint8_t person_jpg_end[] asm("_binary_person_jpg_end");
+
+#elif USE_ANIMALS_MODEL
+extern const uint8_t fox_jpg_start[] asm("_binary_fox_jpg_start");
+extern const uint8_t fox_jpg_end[] asm("_binary_fox_jpg_end");
+
 #endif
 
 void test_inference(dl::Model *model, YOLO26 &processor, const uint8_t *jpg_data, size_t jpg_len, const char *name)
@@ -95,7 +104,7 @@ extern "C" void app_main(void)
                                      0,
                                      dl::MEMORY_MANAGER_GREEDY,
                                      nullptr,
-                                     true);
+                                     false);
 
     // 2. Initialize Processor
     YOLO26 processor(model, YOLO_TARGET_K, YOLO_CONF_THRESH, current_classes);
@@ -103,9 +112,14 @@ extern "C" void app_main(void)
     // 3. Run Tests
 #ifdef USE_LEGO_MODEL
     test_inference(model, processor, lego_jpg_start, (size_t)(lego_jpg_end - lego_jpg_start), "lego.jpg");
-#else
+
+#elif USE_COCO_MODEL
     test_inference(model, processor, bus_jpg_start, (size_t)(bus_jpg_end - bus_jpg_start), "bus.jpg");
     test_inference(model, processor, person_jpg_start, (size_t)(person_jpg_end - person_jpg_start), "person.jpg");
+
+#elif USE_ANIMALS_MODEL
+    test_inference(model, processor, fox_jpg_start, (size_t)(fox_jpg_end - fox_jpg_start), "fox.jpg");
+
 #endif
 
     delete model;
