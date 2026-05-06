@@ -1,25 +1,26 @@
-#include "espdet_detect.hpp"
+#include "cat_detect.hpp"
 #include "dl_image_jpeg.hpp"
 #include "esp_log.h"
 
-extern const uint8_t person_jpg_start[] asm("_binary_person_jpg_start");
-extern const uint8_t person_jpg_end[] asm("_binary_person_jpg_end");
-const char *TAG = "human_fall_detect";
+extern const uint8_t cat_jpg_start[] asm("_binary_cat_jpg_start");
+extern const uint8_t cat_jpg_end[] asm("_binary_cat_jpg_end");
+const char *TAG = "cat_detect";
 
 extern "C" void app_main(void)
 {
-#if CONFIG_ESPDET_DETECT_MODEL_IN_SDCARD
+#if CONFIG_CAT_DETECT_MODEL_IN_SDCARD
     ESP_ERROR_CHECK(bsp_sdcard_mount());
 #endif
 
-    dl::image::jpeg_img_t jpeg_img = {.data = (void *)person_jpg_start, .data_len = (size_t)(person_jpg_end - person_jpg_start)};
+    dl::image::jpeg_img_t jpeg_img = {.data = (void *)cat_jpg_start, .data_len = (size_t)(cat_jpg_end - cat_jpg_start)};
     auto img = dl::image::sw_decode_jpeg(jpeg_img, dl::image::DL_IMAGE_PIX_TYPE_RGB888);
 
-    ESPDetDetect *detect = new ESPDetDetect();
+    CatDetect *detect = new CatDetect();
     detect->get_raw_model()->profile_memory();
     detect->get_raw_model()->profile_module(true);
 
     auto &detect_results = detect->run(img);
+
     for (const auto &res : detect_results)
     {
         ESP_LOGI(TAG,
@@ -34,7 +35,7 @@ extern "C" void app_main(void)
     delete detect;
     heap_caps_free(img.data);
 
-#if CONFIG_ESPDET_DETECT_MODEL_IN_SDCARD
+#if CONFIG_CAT_DETECT_MODEL_IN_SDCARD
     ESP_ERROR_CHECK(bsp_sdcard_unmount());
 #endif
 }

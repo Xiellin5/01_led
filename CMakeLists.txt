@@ -27,11 +27,21 @@ list(APPEND EXTRA_COMPONENT_DIRS
     components/Middlewares/esp8266
 )
 
+# list(APPEND EXTRA_COMPONENT_DIRS
+#     components/Service/My_printf
+#     components/Service/Filter
+#     components/Service/PID
+#     components/Service/yolo26
+#     components/Service/cat_detect
+#     )
 list(APPEND EXTRA_COMPONENT_DIRS
     components/Service/My_printf
     components/Service/Filter
     components/Service/PID
-    components/Service/yolo26)
+    components/Service/yolo26
+    components/Service/human_fall_detect
+    )
+
 
 list(APPEND EXTRA_COMPONENT_DIRS
     components/User/Car)
