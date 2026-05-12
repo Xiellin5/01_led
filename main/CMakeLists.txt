@@ -2,23 +2,25 @@ cmake_minimum_required(VERSION 3.16)
 # =========================================================================
 # 🛠️ main.c
 # =========================================================================
-# idf_component_register(SRCS "main.c"
-#                      INCLUDE_DIRS ".")
+set(embed_files     "person.jpg")
+idf_component_register(SRCS "main.c"
+                     INCLUDE_DIRS "."
+                     EMBED_FILES ${embed_files})
 
 # =========================================================================
 # 🛠️ pico
 # =========================================================================
 
-set(include_dirs    ./)
+# set(include_dirs    ./)
 
-set(requires        human_fall_detect)
+# set(requires        human_fall_detect)
 
-set(embed_files     "person.jpg")
+# set(embed_files     "person.jpg")
 
-idf_component_register(SRCS "app_main.cpp" 
-                        INCLUDE_DIRS ${include_dirs} 
-                        REQUIRES ${requires} 
-                        EMBED_FILES ${embed_files})
+# idf_component_register(SRCS "app_main.cpp" 
+#                         INCLUDE_DIRS ${include_dirs} 
+#                         REQUIRES ${requires} 
+#                         EMBED_FILES ${embed_files})
 
 # =========================================================================
 # 🛠️ USER CONFIGURATION: yolo26

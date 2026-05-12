@@ -41,7 +41,7 @@ COLORS = ["#FF3333", "#3399FF", "#33CC66", "#FF9900", "#CC33FF", "#00CCCC"]
 # """
 RAW_LOG_DATA = """
 I (2453) image:: person.jpg
-I (4271) human_fall_detect: [category: 0, score: 0.468791, x1: 0, y1: 101, x2: 128, y2: 223]
+I (2307) human_fall_detect: [category: 0, score: 0.468791, x1: 0, y1: 101, x2: 128, y2: 223]
 """
 
 

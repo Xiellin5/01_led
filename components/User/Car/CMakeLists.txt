@@ -1,9 +1,12 @@
-set(src_dirs    .)
+set(src_dirs    .
+                lib
+                task)
 
 set(include_dirs include)
 
 set(requires
-            driver)
+            driver
+            human_fall_detect)
 # 传感器
 list(APPEND requires
             MPU6050_XiaoHei)

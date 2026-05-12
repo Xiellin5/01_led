@@ -7,6 +7,8 @@
 extern const uint8_t person_jpg_start[] asm("_binary_person_jpg_start");
 extern const uint8_t person_jpg_end[] asm("_binary_person_jpg_end");
 
+// 加入ai模块的测试
+// 现象:发送flash中的图片首尾地址后，执行ai任务，并且打印结果
 void app_main(void)
 {
     if (xTaskCreate(system_run, "system", 1024 * 2 + 512, NULL, 1, NULL) == pdPASS)
