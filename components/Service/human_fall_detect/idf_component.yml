@@ -1,0 +1,7 @@
+version: "0.1.1"
+license: "MIT"
+description: human_fall detect model.
+url: https://github.com/espressif/esp-dl/tree/master/models/human_fall_detect
+dependencies:
+  espressif/esp-dl:
+    version: "^3.1.3"

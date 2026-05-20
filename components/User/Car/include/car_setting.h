@@ -19,4 +19,9 @@
 #define CAR_KIR 0.0
 #define CAR_KDR 0.0
 
+// 任务优先级
+#define AI_TASK_PRIORITY 19
+#define PID_TASK_PRIORITY 18
+#define CAMERA_TASK_PRIORITY 18
+
 #endif /* __CAR_SETTING_H__ */

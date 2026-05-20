@@ -12,12 +12,13 @@ import sys
 
 # Correct path relative to 'results/' folder
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-IMAGE_DIR = os.path.join(CURRENT_DIR, "../main/images")
+# IMAGE_DIR = os.path.join(CURRENT_DIR, "../main/images")
+IMAGE_DIR = os.path.join(CURRENT_DIR, "../main")
 OUTPUT_DIR = CURRENT_DIR
 
 # Model Input Size
-MODEL_WIDTH = 512
-MODEL_HEIGHT = 512
+MODEL_WIDTH = 224
+MODEL_HEIGHT = 224
 
 COLORS = ["#FF3333", "#3399FF", "#33CC66", "#FF9900", "#CC33FF", "#00CCCC"]
 
@@ -39,11 +40,8 @@ COLORS = ["#FF3333", "#3399FF", "#33CC66", "#FF9900", "#CC33FF", "#00CCCC"]
 # I (6614) YOLO26: [category: bicycle, score: 0.66, x1: 189, y1: 306, x2: 388, y2: 410]
 # """
 RAW_LOG_DATA = """
-I (2180) image:: lego.jpg
-I (4329) yolo26_detect: Pre: 15 ms | Inf: 2031 ms | Post: 5 ms
-I (4330) YOLO26: [category: 2x2_green, score: 0.79, x1: 223, y1: 137, x2: 331, y2: 293]
-I (4332) YOLO26: [category: 2x4_green, score: 0.97, x1: 107, y1: 129, x2: 250, y2: 374]
-I (4339) YOLO26: [category: 2x4_green, score: 0.95, x1: 293, y1: 150, x2: 423, y2: 411]
+I (2453) image:: person.jpg
+I (2307) human_fall_detect: [category: 0, score: 0.468791, x1: 0, y1: 101, x2: 128, y2: 223]
 """
 
 
@@ -199,7 +197,8 @@ def visualize_results(results):
             )
 
         plt.axis("off")
-        plt.title(f"YOLO26 Detect: {img_name}", fontsize=14, fontweight="bold")
+        # plt.title(f"YOLO26 Detect: {img_name}", fontsize=14, fontweight="bold")
+        plt.title(f"Pico Detect: {img_name}", fontsize=14, fontweight="bold")
         plt.tight_layout()
 
         # Save instead of show
