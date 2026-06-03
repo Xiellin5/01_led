@@ -6,7 +6,9 @@ set(include_dirs include)
 
 set(requires
             driver
-            human_fall_detect)
+            human_fall_detect
+			Camera
+			)
 # 传感器
 list(APPEND requires
             MPU6050_XiaoHei)
