@@ -52,6 +52,19 @@ extern "C" void run_human_fall_detect(const uint8_t *jpg_start, const uint8_t *j
     dl::image::jpeg_img_t jpeg_img = {.data = (void *)jpg_start, .data_len = (size_t)(jpg_end - jpg_start)};
     auto img = dl::image::sw_decode_jpeg(jpeg_img, dl::image::DL_IMAGE_PIX_TYPE_RGB888);
 
+	// ==================【核心安全卫士：拦截坏图，杜绝崩溃】==================
+    if (img.data == nullptr || img.width <= 0 || img.height <= 0)
+    {
+        ESP_LOGE(TAG, "sw_decode_jpeg failed! Data corrupted in transit. Width: %d, Height: %d", img.width, img.height);
+        
+        // 释放可能已经申请的部分内存，防止内存泄漏
+        if (img.data != nullptr) {
+            heap_caps_free(img.data);
+        }
+        return; // 【核心防护】直接退出，不运行 detect->run(img)，从而100%防止 crash 重启
+    }
+    // =====================================================================
+
     auto &detect_results = detect->run(img);
     for (const auto &res : detect_results)
     {

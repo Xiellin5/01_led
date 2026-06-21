@@ -1,0 +1,7 @@
+信号		OpenMV 引脚		ESP32-P4 引脚		说明
+CS		P3(P5 加入lcd)		GPIO 20			片选
+SCLK		P2				GPIO 21			时钟
+MISO		P1				GPIO 22			主入从出
+MOSI		P0				GPIO 23			主出从入
+Handshake	P4				GPIO 24			从机准备好信号
+GND			GND				GND				必须共地

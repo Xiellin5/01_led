@@ -33,14 +33,16 @@ void jpeg_queue_init(bool if_rst)
  * @param end   数据结束指针
  * @return true成功，false失败
  */
-bool jpeg_queue_send(const uint8_t *start, const uint8_t *end)
+// 修改 my_queue.c
+bool jpeg_queue_send(const uint8_t *start, const uint8_t *end, TickType_t timeout)
 {
     if (camera_jpg_queue == NULL)
     {
         jpeg_queue_init(false);
     }
     jpeg_msg_t msg = {.start = start, .end = end};
-    return xQueueSend(camera_jpg_queue, &msg, 0) == pdTRUE;
+    // 将原先的 0 改为 timeout 参数
+    return xQueueSend(camera_jpg_queue, &msg, timeout) == pdTRUE;
 }
 
 /**

@@ -1,0 +1,5 @@
+OpenMV	(烧录，不烧录可看打印帧率）
+OpenMV	ESP32
+TX		GPIO18 (RX)
+RX		GPIO17 (TX)
+GND		GND
